@@ -52,7 +52,7 @@ const openai = new OpenAIApi(configuration);
 
   const io = socketIo(server, {  // socket.io
     cors: {
-      origin: "https://whatsapp-api-beta.vercel.app",
+      origin: "*",
       method: ["GET", "POST"]
     }
   });
@@ -83,42 +83,42 @@ const openai = new OpenAIApi(configuration);
     await client.initialize();
   });
 
-  client.on('message', async (message) => {
-    try {
-      if (message.body.startsWith('#t')) {
-        const text = message.body.substring(3); // Menghapus '#t ' dari awal pesan
-        const translation = await translateToEnglish(text);
-        message.reply(`Terjemahan: ${translation}`);
-      } else if (message.body === 'siapa ricky') {
-        message.reply("Ricky adalah teman saya, dia baik hati dan tidak sombong seperti kamu.");
-      } else if (message.body === 'p' || message.body === 'lenx') {
-        message.reply("Hadir");
-      } else if (message.body === 'gambar') {
-        // Logika untuk mengirim gambar
-        // ...
-      } else {
-        let prompt = message.body;
-        if (message.body !== 'gambar') {
-          prompt = `Q: ${message.body}\nA:`;
-        }
-        const response = await openai.createCompletion({
-          model: "text-davinci-003",
-          prompt: prompt,
-          temperature: 0,
-          max_tokens: 1000,
-          top_p: 1.0,
-          frequency_penalty: 0.0,
-          presence_penalty: 0.0,
-        });
-        message.reply(response.data.choices[0].text);
-      }
-    } catch (error) {
-      console.log(error);
-      message.reply('Error: Gagal memproses pesan');
-    }
-  });
+  // client.on('message', async (message) => {
+  //   try {
+  //     if (message.body.startsWith('#t')) {
+  //       const text = message.body.substring(3); // Menghapus '#t ' dari awal pesan
+  //       const translation = await translateToEnglish(text);
+  //       message.reply(`Terjemahan: ${translation}`);
+  //     } else if (message.body === 'siapa ricky') {
+  //       message.reply("Ricky adalah teman saya, dia baik hati dan tidak sombong seperti kamu.");
+  //     } else if (message.body === 'p' || message.body === 'lenx') {
+  //       message.reply("Hadir");
+  //     } else if (message.body === 'gambar') {
+  //       // Logika untuk mengirim gambar
+  //       // ...
+  //     } else {
+  //       let prompt = message.body;
+  //       if (message.body !== 'gambar') {
+  //         prompt = `Q: ${message.body}\nA:`;
+  //       }
+  //       const response = await openai.createCompletion({
+  //         model: "text-davinci-003",
+  //         prompt: prompt,
+  //         temperature: 0,
+  //         max_tokens: 1000,
+  //         top_p: 1.0,
+  //         frequency_penalty: 0.0,
+  //         presence_penalty: 0.0,
+  //       });
+  //       message.reply(response.data.choices[0].text);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     message.reply('Error: Gagal memproses pesan');
+  //   }
+  // });
 
-  // ==============================================================
+  // // ==============================================================
   client.on('message', async (message) => {
     try {
       if (message.body.startsWith('#t')) {
