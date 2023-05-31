@@ -76,8 +76,8 @@ client.on('message', async (message) => {
   }
 });
 
-server.listen(PORT, async function () {
-  console.log(`Listening on port ${PORT}`);
+server.listen(port, async function () {
+  console.log(`Listening on port ${port}`);
   client.initialize();
 });
 
