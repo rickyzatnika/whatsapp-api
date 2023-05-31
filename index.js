@@ -17,7 +17,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(cors({
@@ -49,10 +49,17 @@ const client = new Client({
   await client.initialize();
 
   // Endpoint untuk mengambil QR Code
-  app.get('/qrcode', async function (req, res) {
-    const qrCodeData = await client.getQRCode();
-    const qrCodeUrl = await qrcode.toDataURL(qrCodeData);
-    res.json({ url: qrCodeUrl });
+  app.get('/qrcode', async (req, res) => {
+    try {
+      // Lakukan proses pembuatan QR code di sini
+      const qrCodeData = await generateQRCode(); // Fungsi untuk membuat QR code
+
+      // Kirim QR code sebagai respons
+      res.send(qrCodeData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
   });
 
   // Event saat client siap

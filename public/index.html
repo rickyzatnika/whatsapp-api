@@ -14,18 +14,17 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
-      $.ajax({
-        url: 'https://whatsapp-api-beta.vercel.app/qrcode', // Ganti URL dengan URL yang sesuai
-        method: 'GET',
-        success: function (data) {
-          $('#qrcode').html('<img src="' + data.url + '" alt="QR Code">');
-        },
-        error: function (error) {
-          console.error(error);
-        }
+      // Mengganti URL koneksi dengan endpoint /qrcode pada server
+      var url = 'https://whatsapp-api-beta.vercel.app/qrcode';
+
+      // Menggunakan AJAX untuk mengambil QR code dari server
+      $.get(url, function (src) {
+        // Menampilkan QR code pada elemen dengan id "qrcode"
+        $("#qrcode").attr("src", src);
       });
     });
   </script>
+ 
 </body>
 
 </html>
