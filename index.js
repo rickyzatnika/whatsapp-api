@@ -29,7 +29,7 @@ app.use(cors({
 
 
 // Halaman utama
-app.get('/qrcode', function (req, res) {
+app.get('/', function (req, res) {
   res.sendFile('index.html', { root: __dirname });
 });
 
