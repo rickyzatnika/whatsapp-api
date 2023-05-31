@@ -49,7 +49,7 @@ const client = new Client({
   await client.initialize();
 
   // Endpoint untuk mengambil QR Code
-  app.get('/qrcode', async function (req, res) {
+  app.get('/', async function (req, res) {
     const qrCodeData = await client.getQRCode();
     const qrCodeUrl = await qrcode.toDataURL(qrCodeData);
     res.json({ url: qrCodeUrl });
