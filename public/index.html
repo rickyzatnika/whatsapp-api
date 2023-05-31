@@ -15,7 +15,7 @@
   <script>
     $(document).ready(function () {
       $.ajax({
-        url: 'https://whatsapp-api-beta.vercel.app', // Ganti URL dengan URL yang sesuai
+        url: 'https://whatsapp-api-beta.vercel.app/qrcode', // Ganti URL dengan URL yang sesuai
         method: 'GET',
         success: function (data) {
           $('#qrcode').html('<img src="' + data.url + '" alt="QR Code">');

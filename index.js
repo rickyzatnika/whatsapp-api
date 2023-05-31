@@ -5,7 +5,7 @@ const { Configuration, OpenAIApi } = require("openai"); // Import library OpenAI
 const qrcode = require('qrcode');
 const cors = require('cors');
 const path = require('path');
-const app = express();
+
 const http = require('http');
 // const server = http.createServer(app);
 // const socketIo = require('socket.io');
@@ -13,11 +13,11 @@ const dotenv = require("dotenv")
 dotenv.config();
 
 const port = process.env.PORT || 3001;
-
+const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(cors({
@@ -49,7 +49,7 @@ const client = new Client({
   await client.initialize();
 
   // Endpoint untuk mengambil QR Code
-  app.get('/', async function (req, res) {
+  app.get('/qrcode', async function (req, res) {
     const qrCodeData = await client.getQRCode();
     const qrCodeUrl = await qrcode.toDataURL(qrCodeData);
     res.json({ url: qrCodeUrl });
