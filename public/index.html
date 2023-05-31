@@ -22,7 +22,7 @@
     <script>
       $(document).ready(function () {
         var socket = io.connect("https://whatsapp-api-beta.vercel.app", {
-          path: "/socket.io",
+          path: "/qr-code",
         });
         socket.on("message", function (msg) {
           $(".logs").append($("<li>").text(msg));
