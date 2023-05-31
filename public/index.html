@@ -1,35 +1,4 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <title>WhatsApp API</title>
-</head>
-
-<body>
-  <img id="qrcode" src="" alt="QR Code">
-
-  <ul class="logs"></ul>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $.get("/qrcode", function (data) {
-        $("#qrcode").attr("src", data);
-      });
-
-      const socket = new WebSocket("wss://whatsapp-api-beta.vercel.app/");
-
-      socket.addEventListener("message", function (event) {
-        const message = event.data;
-        $(".logs").append($("<li>").text(message));
-      });
-    });
-  </script>
-</body>
-
-</html>
-
-<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -52,8 +21,8 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       $(document).ready(function () {
-        var socket = io.connect("https://whatsapp-api-beta.vercel.app/", {
-          path: "/socket.io",
+        var socket = io.connect("https://whatsapp-api-beta.vercel.app", {
+          path: "/",
         });
         socket.on("message", function (msg) {
           $(".logs").append($("<li>").text(msg));
@@ -64,4 +33,4 @@
       });
     </script>
   </body>
-</html> -->
+</html>
