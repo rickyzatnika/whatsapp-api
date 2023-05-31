@@ -5,18 +5,18 @@ const { Configuration, OpenAIApi } = require("openai"); // Import library OpenAI
 const qrcode = require('qrcode');
 const cors = require('cors');
 const path = require('path');
-
+const app = express();
 const http = require('http');
-// const server = http.createServer(app);
+const server = http.createServer(app);
 // const socketIo = require('socket.io');
 const dotenv = require("dotenv")
 dotenv.config();
 
-const port = process.env.PORT || 3001;
-const app = express();
+const PORT = process.env.PORT || 3001;
+
 // Middleware
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -29,7 +29,7 @@ app.use(cors({
 
 
 // Halaman utama
-app.get('/', function (req, res) {
+app.get('/qrcode', function (req, res) {
   res.sendFile('index.html', { root: __dirname });
 });
 
@@ -40,7 +40,7 @@ const openai = new OpenAIApi(configuration);
 
 const client = new Client({
   authStrategy: new LocalAuth({
-    clientId: "client-one",
+    clientId: "client-one", // ID client yang digunakan
     setDisplayName: "Webqodes Invitation"
   }),
 });
@@ -76,8 +76,8 @@ client.on('message', async (message) => {
   }
 });
 
-server.listen(port, async function () {
-  console.log(`Listening on port ${port}`);
+server.listen(PORT, async function () {
+  console.log(`Listening on port ${PORT}`);
   client.initialize();
 });
 
@@ -152,7 +152,6 @@ const checkRegisterNumber = async function (number) {
 
 
 
-
 // (async () => {
 
 //   const client = new Client({
@@ -165,7 +164,7 @@ const checkRegisterNumber = async function (number) {
 
 //   const io = socketIo(server, {  // socket.io
 //     cors: {
-//       origin: "https://whatsapp-api-beta.vercel.app",
+//       origin: "http://localhost:3001",
 //       method: ["GET", "POST"]
 //     }
 //   });
@@ -231,7 +230,7 @@ const checkRegisterNumber = async function (number) {
 //     }
 //   });
 
-//   // // ==============================================================
+//   // ==============================================================
 //   // client.on('message', async (message) => {
 //   //   try {
 //   //     if (message.body.startsWith('#t')) {
@@ -264,58 +263,56 @@ const checkRegisterNumber = async function (number) {
 
 
 
-// send - message
-
-
-// const checkRegisterNumber = async function (number) {
-//   const isRegistered = await client.isRegisteredUser(number);
-//   return isRegistered
-// }
-// app.post('/whatsapp', async (req, res) => {
-//   try {
-//     let number = req.body.number;
-//     let message = req.body.message;
-
-//     const displayName = "WebHouse_Invitation"
-//     if (number) {
-//       number = number + "@c.us"
-//     }
-//     const user = await client.isRegisteredUser(number);
-//     const isRegisteredNumber = await checkRegisterNumber(number);
-
-//     if (!isRegisteredNumber) {
-//       return res.status(422).json({ msg: "Mohon periksa kembali, ada Nomor yang tidak terdaftar di Whatsapp" })
-//     }
-
-//     if (user) {
-//       await client.setDisplayName(displayName);
-//       client.sendMessage(number, message)
-//       res.json({ msg: " Pesan terkirim " })
-//     }
-
-
-//   } catch (error) {
-//     res.status(500).json({ msg: "Failed to send message" })
+//   // send - message
+//   const checkRegisterNumber = async function (number) {
+//     const isRegistered = await client.isRegisteredUser(number);
+//     return isRegistered
 //   }
-// });
+//   app.post('/whatsapp', async (req, res) => {
+//     try {
+//       let number = req.body.number;
+//       let message = req.body.message;
 
-// async function translateToEnglish(text) {
-//   const prompt = `Translate to English: ${text}`;
-//   const response = await openai.createCompletion({
-//     model: "text-davinci-003",
-//     prompt: prompt,
-//     temperature: 0,
-//     max_tokens: 1000,
-//     top_p: 1.0,
-//     frequency_penalty: 0.0,
-//     presence_penalty: 0.0,
+//       const displayName = "WebHouse_Invitation"
+//       if (number) {
+//         number = number + "@c.us"
+//       }
+//       const user = await client.isRegisteredUser(number);
+//       const isRegisteredNumber = await checkRegisterNumber(number);
+
+//       if (!isRegisteredNumber) {
+//         return res.status(422).json({ msg: "Mohon periksa kembali, ada Nomor yang tidak terdaftar di Whatsapp" })
+//       }
+
+//       if (user) {
+//         await client.setDisplayName(displayName);
+//         client.sendMessage(number, message)
+//         res.json({ msg: " Pesan terkirim " })
+//       }
+
+
+//     } catch (error) {
+//       res.status(500).json({ msg: "Failed to send message" })
+//     }
 //   });
-//   return response.data.choices[0].text.trim();
-// }
+
+//   async function translateToEnglish(text) {
+//     const prompt = `Translate to English: ${text}`;
+//     const response = await openai.createCompletion({
+//       model: "text-davinci-003",
+//       prompt: prompt,
+//       temperature: 0,
+//       max_tokens: 1000,
+//       top_p: 1.0,
+//       frequency_penalty: 0.0,
+//       presence_penalty: 0.0,
+//     });
+//     return response.data.choices[0].text.trim();
+//   }
 
 
 
-
+// })();
 
 
 
