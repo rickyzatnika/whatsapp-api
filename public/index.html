@@ -21,7 +21,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       $(document).ready(function () {
-        var socket = io.connect("https://whatsapp-api-beta.vercel.app", {
+        var socket = io.connect("https://whatsapp-api-beta.vercel.app/", {
           path: "/socket.io",
         });
         socket.on("message", function (msg) {
