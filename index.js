@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({
   credentials: true,
-  origin: true, // Izinkan CORS untuk alamat ini
+  origin: "*", // Izinkan CORS untuk alamat ini
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
@@ -53,7 +53,7 @@ const openai = new OpenAIApi(configuration);
 
   const io = socketIo(server, {  // socket.io
     cors: {
-      origin: "http://localhost:3001",
+      origin: "https://whatsapp-api-beta.vercel.app",
       method: ["GET", "POST"]
     }
   });
