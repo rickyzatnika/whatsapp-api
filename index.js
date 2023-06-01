@@ -12,7 +12,7 @@ const socketIo = require('socket.io');
 const dotenv = require("dotenv")
 dotenv.config();
 
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(bodyParser.json());
