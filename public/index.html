@@ -9,7 +9,8 @@
 
 <body>
   <div class="logs"></div>
-  <div  >
+  <div >
+    <h1>TEST</h1>
       <img id="qrcode" src="" alt=""/>
   </div>
 
@@ -17,7 +18,7 @@
   <script>
    $(document).ready(function () {
       // Mengganti URL koneksi dengan endpoint /qrcode pada server
-      var url = 'https://whatsapp-api-beta.vercel.app/qrcode';
+      var url = 'https://whatsapp-api-beta.vercel.app/qr';
 
       // Menggunakan AJAX untuk mengambil QR code dari server
       $.get(url, function (src) {

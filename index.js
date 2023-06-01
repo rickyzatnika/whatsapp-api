@@ -96,7 +96,7 @@ async function translateToEnglish(text) {
   return response.data.choices[0].text.trim();
 }
 
-app.get('/qrcode', async (req, res) => {
+app.get('/qr', async (req, res) => {
   try {
     // Lakukan proses pembuatan QR code di sini
     // Fungsi untuk membuat QR code
