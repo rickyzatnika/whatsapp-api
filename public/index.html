@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,11 +9,13 @@
 
 <body>
   <div class="logs"></div>
-  <div id="qrcode"></div>
+  <div  >
+      <img id="qrcode" src="" alt=""/>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function () {
+   $(document).ready(function () {
       // Mengganti URL koneksi dengan endpoint /qrcode pada server
       var url = 'https://whatsapp-api-beta.vercel.app/qrcode';
 
@@ -23,13 +25,14 @@
         $("#qrcode").attr("src", src);
       });
     });
+    
   </script>
  
 </body>
 
-</html> -->
+</html>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -64,4 +67,4 @@
       });
     </script>
   </body>
-</html>
+</html> -->
